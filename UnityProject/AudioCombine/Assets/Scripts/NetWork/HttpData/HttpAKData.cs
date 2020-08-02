@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class HttpAKData : HttpData
 {
-    public static string portPath
-    {
-        get => ApiPath.AK;
-    }
+    public static string portPath = ApiPath.AK;
 
     public static string portMethod
     {
@@ -17,8 +14,7 @@ public class HttpAKData : HttpData
 
     public class DataSend
     {
-        public string loginName = "loginName";
-        public string password = "password";
+        public string cgid = "cgid";
     }
 
     public class DataReceive

@@ -13,7 +13,6 @@ public class NetWorkDemo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.LogError(EncryptUtil.Md532("etJkgmPm"));
         ServerMgr.S.Login("20200705", "etJkgmPm", null);
         // ServerMgr.S.Login("123", "123123", null);
     }
