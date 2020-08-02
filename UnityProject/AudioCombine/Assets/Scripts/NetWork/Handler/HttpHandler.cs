@@ -96,7 +96,7 @@ public class HttpHandler
     }
 
 
-    RequestHelper GetRequestHelper(string path, string method, Dictionary<string, string> queries = null)
+    RequestHelper GetRequestHelper(string path, string method, Dictionary<string, string> queries)
     {
         var request = new RequestHelper
         {
