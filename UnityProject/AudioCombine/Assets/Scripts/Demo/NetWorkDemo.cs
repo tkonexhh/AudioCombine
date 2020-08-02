@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NetWorkDemo : MonoBehaviour
 {
-
     private void Awake()
     {
         Application.runInBackground = true;
@@ -13,12 +13,8 @@ public class NetWorkDemo : MonoBehaviour
     void Start()
     {
         ServerMgr.S.GetAK(null);
-        //ServerMgr.S.Login("123", "123123", null);
+        // ServerMgr.S.Login("123", "123123", null);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 }

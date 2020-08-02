@@ -13,8 +13,6 @@ public class ServerMgr : TMonoSingleton<ServerMgr>
     {
         RestClient.Request(GetRequestHelper_Post(ApiPath.AK)).Then(response =>
        {
-           Debug.LogError("response:" + response.Request);
-           Debug.LogError("response:" + response.Text);
            if (response.StatusCode == 200 && string.IsNullOrEmpty(response.Error))
            {
                Debug.LogError("11111111");
@@ -128,12 +126,13 @@ public class ServerMgr : TMonoSingleton<ServerMgr>
             Uri = NetWorkDefine.baseUrl + path,
             Method = "GET",
             Timeout = 10,
+            Retries = 1,
             Params = queries,
             ContentType = "application/json",
             CertificateHandler = new BypassCertificate(),
             EnableDebug = true,
         };
-        request.Headers.Add("Accept", "application/json");
+        //request.Headers.Add("Accept", "application/json");
         return request;
     }
 }

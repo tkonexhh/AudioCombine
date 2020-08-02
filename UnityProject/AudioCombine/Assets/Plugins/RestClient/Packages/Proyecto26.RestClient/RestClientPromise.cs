@@ -1,11 +1,11 @@
 ﻿using RSG;
-using Qarth;
+
 namespace Proyecto26
 {
     public static partial class RestClient
     {
 
-        #region Promises
+    #region Promises
 
         /// <summary>
         /// Create an HTTP request and return a promise.
@@ -325,9 +325,9 @@ namespace Proyecto26
             return promise;
         }
 
-        #endregion
+    #endregion
 
-        #region Helpers
+    #region Helpers
 
         /// <summary>
         /// Promisify the specified callback.
@@ -351,13 +351,12 @@ namespace Proyecto26
         /// <typeparam name="T">The element type of the response.</typeparam>
         private static void Promisify<T>(this Promise<T> promise, RequestException error, ResponseHelper response, T body)
         {
-            if (error != null && response != null)
-            {
+            if (error != null && response != null) {
                 error.ServerMessage = response.Error ?? error.Message;
             }
             promise.Promisify(error, body);
         }
 
-        #endregion
+    #endregion
     }
 }
