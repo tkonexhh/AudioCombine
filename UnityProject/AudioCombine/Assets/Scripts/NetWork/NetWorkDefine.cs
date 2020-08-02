@@ -10,6 +10,6 @@ public class NetWorkDefine
 
 public class ApiPath
 {
-    public const string LOGIN = "/manage/shiro/login";
+    public const string LOGIN = "/manage/shiro/login/app";
     public const string AK = "/manage/shiro/ak";
 }

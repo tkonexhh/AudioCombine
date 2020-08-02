@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class HttpAKData : HttpData
 {
-    public override string portPath
+    public static string portPath
     {
         get => ApiPath.AK;
     }
 
-    public override string portMethod
+    public static string portMethod
     {
         get { return "GET"; }
     }
@@ -25,5 +25,11 @@ public class HttpAKData : HttpData
     {
         public string retCode { get; set; }
         public string retResp { get; set; }
+        public SubData data { get; set; }
+    }
+
+    public class SubData
+    {
+        public string ak { get; set; }
     }
 }

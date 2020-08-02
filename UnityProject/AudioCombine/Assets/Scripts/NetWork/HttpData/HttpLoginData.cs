@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class HttpLoginData : HttpData
 {
-    public override string portPath
+    public static string portPath
     {
-        get => ApiPath.AK;
+        get => ApiPath.LOGIN;
     }
 
-    public override string portMethod
+    public static string portMethod
     {
-        get { return "GET"; }
+        get { return "POST"; }
     }
 
     public class DataSend
