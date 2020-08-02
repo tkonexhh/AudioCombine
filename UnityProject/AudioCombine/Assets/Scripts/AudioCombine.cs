@@ -22,7 +22,7 @@ public class AudioCombine : MonoBehaviour
 
     private void Awake()
     {
-        PlayPriceAudio(m_Cash);
+        // PlayPriceAudio(m_Cash);
     }
 
     private void Update()
