@@ -5,11 +5,7 @@ using UnityEngine;
 public class HttpLoginData : HttpData
 {
     public static string portPath = ApiPath.LOGIN;
-
-    public static string portMethod
-    {
-        get { return "POST"; }
-    }
+    public static string portMethod = "POST";
 
     public class DataSend
     {

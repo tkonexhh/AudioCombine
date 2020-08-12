@@ -5,11 +5,7 @@ using UnityEngine;
 public class HttpAKData : HttpData
 {
     public static string portPath = ApiPath.AK;
-
-    public static string portMethod
-    {
-        get { return "GET"; }
-    }
+    public static string portMethod = "GET";
 
 
     public class DataSend

@@ -122,7 +122,9 @@ public class AudioCombine : MonoBehaviour
             }
         }
 
-        m_PrepareAudios.Add(m_EndAudio);
+        if (flo == 0)
+            m_PrepareAudios.Add(m_EndAudio);
+
         StartCoroutine(Audio(m_PrepareAudios));
 
     }
@@ -146,6 +148,7 @@ public class AudioCombine : MonoBehaviour
         var tempAudios = new List<AudioClip>(audios.ToArray());
         for (int i = 0; i < tempAudios.Count; i++)
         {
+            if (tempAudios[i] == null) continue;
             m_AudioSource.clip = tempAudios[i];
             m_AudioSource.Play();
             yield return new WaitForSeconds(tempAudios[i].length);

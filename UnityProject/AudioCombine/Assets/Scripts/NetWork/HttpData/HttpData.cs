@@ -4,13 +4,5 @@ using UnityEngine;
 
 public class HttpData
 {
-    // public virtual string portPath
-    // {
-    //     get { return ""; }
-    // }
 
-    // public virtual string portMethod
-    // {
-    //     get { return "GET"; }
-    // }
 }

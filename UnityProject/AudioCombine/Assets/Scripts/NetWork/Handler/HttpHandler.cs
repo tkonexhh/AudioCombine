@@ -24,7 +24,7 @@ public class HttpHandler
                 {
                     if (data.retCode != "0000")
                     {
-                        Log.e("data.code  = " + data.retCode);// + "  mission_id= " + data.data.record.mission_id);
+                        Log.e("data.code  = " + data.retCode);
                     }
                     callback.Invoke(data);
                     callback = null;
@@ -68,7 +68,7 @@ public class HttpHandler
                 {
                     if (data.retCode != "0000")
                     {
-                        Log.e("data.code  = " + data.retCode + data.retResp);// + "  mission_id= " + data.data.record.mission_id);
+                        Log.e("data.code  = " + data.retCode);
                     }
                     callback.Invoke(data);
                     callback = null;
@@ -94,7 +94,6 @@ public class HttpHandler
         })
           .Catch(e => Debug.LogError(e));
     }
-
 
     RequestHelper GetRequestHelper(string path, string method, Dictionary<string, string> queries)
     {
