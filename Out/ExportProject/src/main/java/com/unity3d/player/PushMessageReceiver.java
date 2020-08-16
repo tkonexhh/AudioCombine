@@ -13,6 +13,7 @@ import cn.jpush.android.api.CustomMessage;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.JPushMessage;
 import cn.jpush.android.api.NotificationMessage;
+import cn.jpush.android.helper.Logger;
 import cn.jpush.android.service.JPushMessageReceiver;
 
 public class PushMessageReceiver extends JPushMessageReceiver{
@@ -111,7 +112,9 @@ public class PushMessageReceiver extends JPushMessageReceiver{
 
     //send msg to MainActivity
     private void processCustomMessage(Context context, CustomMessage customMessage) {
-//        if (MainActivity.isForeground) {
+
+        Logger.d("JIGUANG-Example", "processCustomMessage  " + customMessage.message);
+        //        if (MainActivity.isForeground) {
 //            String message = customMessage.message;
 //            String extras = customMessage.extra;
 //            Intent msgIntent = new Intent(UnityPlayerActivity.MESSAGE_RECEIVED_ACTION);

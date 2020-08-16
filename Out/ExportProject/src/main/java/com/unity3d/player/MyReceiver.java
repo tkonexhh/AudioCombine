@@ -102,6 +102,9 @@ public class MyReceiver extends BroadcastReceiver {
 	
 	//send msg to MainActivity
 	private void processCustomMessage(Context context, Bundle bundle) {
+		String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+		Logger.d(TAG, "[MyReceiver] processCustomMessage"+message);
+
 //		if (MainActivity.isForeground) {
 //			String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 //			String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);

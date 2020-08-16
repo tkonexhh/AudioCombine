@@ -65,13 +65,13 @@ android {
         buildConfigField "String", "BuildChannel", "\"\""
         minSdkVersion 21
         targetSdkVersion 28
-        applicationId 'com.unity3d.player'
+        applicationId 'com.sky.gift'
         ndk {
             abiFilters 'armeabi-v7a'
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "0f467e7a14e2d2de811680b0", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_APPKEY : "546b33aad1e8f4457c0a8722", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
