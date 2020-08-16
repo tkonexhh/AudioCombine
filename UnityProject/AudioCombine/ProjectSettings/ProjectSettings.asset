@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: xhh
   productName: AudioCombine
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -680,7 +680,8 @@ PlayerSettings:
     28: dUI_MANAGER
     29: dUI_MANAGER
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 0
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

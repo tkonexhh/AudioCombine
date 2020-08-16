@@ -1,4 +1,10 @@
-UnityProject/AudioCombine/Assembly-CSharp.csproj
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+
+/AudioCombine/Assembly-CSharp.csproj
 UnityProject/AudioCombine/Assembly-CSharp-firstpass.csproj
 UnityProject/AudioCombine/Assembly-CSharp-Editor.csproj
 UnityProject/AudioCombine/Assembly-CSharp-Editor-firstpass.csproj
@@ -10,3 +16,8 @@ UnityProject/AudioCombine/AudioCombine.sln
 UnityProject/AudioCombine/.vscode/settings.json
 UnityProject/AudioCombine/spine-unity.csproj
 UnityProject/AudioCombine/spine-unity-editor.csproj
+
+/Out/ExportProject/.gradle
+/Out/ExportProject/.idea
+/Out/ExportProject/build
+/Out/ExportProject/gradle
