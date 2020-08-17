@@ -23,6 +23,7 @@ public class UnityApplication extends Application {
         super.onCreate();
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+
         Log.e("package",getPackageName());
 
     }

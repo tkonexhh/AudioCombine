@@ -20,18 +20,16 @@ public class AudioCombine : MonoBehaviour
 
     private List<AudioClip> m_PrepareAudios = new List<AudioClip>();
 
-    private void Awake()
-    {
-        PlayPriceAudio(m_Cash);
-    }
 
-    private void Update()
+    public void Init()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            PlayPriceAudio(m_Cash);
-        }
+        //m_AudioSource=Camera.main.GetComponent<>
     }
+    // private void Awake()
+    // {
+    //     PlayPriceAudio(m_Cash);
+    // }
+
 
     public void PlayPriceAudio(float cash)
     {

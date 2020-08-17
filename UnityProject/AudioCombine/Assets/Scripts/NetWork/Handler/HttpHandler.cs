@@ -16,7 +16,7 @@ public class HttpHandler
 
         RestClient.Request(GetRequestHelper(HttpAKData.portPath, HttpAKData.portMethod, qs)).Then(response =>
         {
-            Debug.LogError(response.Request.uri);
+            //Debug.LogError(response.Request.uri);
             if (response.StatusCode == 200 && string.IsNullOrEmpty(response.Error))
             {
                 var data = LitJson.JsonMapper.ToObject<HttpAKData.DataReceive>(response.Text);
@@ -60,7 +60,7 @@ public class HttpHandler
 
         RestClient.Request(GetRequestHelper(HttpLoginData.portPath, HttpLoginData.portMethod, qs)).Then(response =>
         {
-            Debug.LogError(response.Request.uri);
+            //Debug.LogError(response.Request.uri);
             if (response.StatusCode == 200 && string.IsNullOrEmpty(response.Error))
             {
                 var data = LitJson.JsonMapper.ToObject<HttpLoginData.DataReceive>(response.Text);
