@@ -95,6 +95,51 @@ public class HttpHandler
           .Catch(e => Debug.LogError(e));
     }
 
+    public void PushTest(string loginToken, Action<HttpPushData.DataReceive> callback)
+    {
+        var send = new HttpPushData.DataSend();
+        Dictionary<string, string> qs = new Dictionary<string, string>();
+        //qs.Add(send.loginToken, loginToken);
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        header.Add(send.loginToken, loginToken);
+
+        RestClient.Request(GetRequestHelper(HttpPushData.portPath, HttpPushData.portMethod, qs, header)).Then(response =>
+        {
+            if (response.StatusCode == 200 && string.IsNullOrEmpty(response.Error))
+            {
+                var data = LitJson.JsonMapper.ToObject<HttpPushData.DataReceive>(response.Text);
+                if (data != null && callback != null)
+                {
+                    if (data.retCode != "0000")
+                    {
+                        Log.e("data.code  = " + data.retCode);
+                    }
+                    callback.Invoke(data);
+                    callback = null;
+                }
+            }
+            else
+            {
+                if (callback != null)
+                {
+                    callback.Invoke(null);
+                    callback = null;
+                }
+                Debug.LogError(response.StatusCode + " >>> " + response.Error);
+            }
+        }, reject =>
+        {
+            if (callback != null)
+            {
+                callback.Invoke(null);
+                callback = null;
+            }
+            Debug.LogError(reject.Message);
+        })
+          .Catch(e => Debug.LogError(e));
+    }
+
     RequestHelper GetRequestHelper(string path, string method, Dictionary<string, string> queries)
     {
         var request = new RequestHelper
@@ -106,6 +151,23 @@ public class HttpHandler
             Params = queries,
             ContentType = "application/json",
             CertificateHandler = new BypassCertificate(),
+
+        };
+        return request;
+    }
+
+    RequestHelper GetRequestHelper(string path, string method, Dictionary<string, string> queries, Dictionary<string, string> headers)
+    {
+        var request = new RequestHelper
+        {
+            Uri = NetWorkDefine.baseUrl + path,
+            Method = method,
+            Timeout = 10,
+            Retries = 1,
+            Params = queries,
+            ContentType = "application/json",
+            CertificateHandler = new BypassCertificate(),
+            Headers = headers,
         };
         return request;
     }

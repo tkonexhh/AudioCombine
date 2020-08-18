@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GFrame;
 
 public class AppMgr : MonoBehaviour
 {
@@ -27,6 +28,15 @@ public class AppMgr : MonoBehaviour
 
     private void Start()
     {
-        var panel = UIMgr.S.OpenPanel("Panels/LoginPanel");
+        string usernameSave = DataRecord.S.GetString(Define.SAVEKEY_USERNAME, "");
+        if (string.IsNullOrEmpty(usernameSave))
+        {
+            UIMgr.S.OpenPanel("Panels/LoginPanel");
+        }
+        else
+        {
+            UIMgr.S.OpenPanel("Panels/ListenPannel");
+        }
+
     }
 }

@@ -23,18 +23,14 @@ public class AudioCombine : MonoBehaviour
 
     public void Init()
     {
-        //m_AudioSource=Camera.main.GetComponent<>
+        if (m_AudioSource == null)
+            m_AudioSource = Camera.main.GetComponent<AudioSource>();
     }
-    // private void Awake()
-    // {
-    //     PlayPriceAudio(m_Cash);
-    // }
 
 
     public void PlayPriceAudio(float cash)
     {
         m_PrepareAudios.Clear();
-
 
         //只能处理0.01-99999之间的数字
         if (cash < 0.01 || cash > 99999)
@@ -69,7 +65,7 @@ public class AudioCombine : MonoBehaviour
         //m_PrepareAudios.Add(m_StartAudio);
         for (int i = 0; i < m_Num.Count; i++)
         {
-            Debug.LogError(m_Num[i] + unit[i]);
+            Debug.LogError(m_Num[i] + unit[length - i - 1]);
             if (m_Num[i] == 0)
             {
                 //TODO 如果上一个已经是0的话 这次就不用加了
@@ -83,7 +79,8 @@ public class AudioCombine : MonoBehaviour
             else
             {
                 m_PrepareAudios.Add(m_NumAudios[m_Num[i]]);
-                m_PrepareAudios.Add(m_UnitAudios[i]);
+                //Debug.LogError("Audio:" + i);
+                m_PrepareAudios.Add(m_UnitAudios[length - i - 1]);
             }
         }
 

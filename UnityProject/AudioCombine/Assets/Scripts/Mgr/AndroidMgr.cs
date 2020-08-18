@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
+using GFrame;
 
 public class AndroidMgr : MonoBehaviour
 {
@@ -52,6 +53,17 @@ public class AndroidListener : AndroidJavaProxy
             if (message.errorCode != 0)
             {
                 AndroidMgr.S.StartCoroutine(SetAlias());
+
+                //测试一下是否能收到通知
+                string loginToken = DataRecord.S.GetString(Define.SAVEKEY_LOGINTOKEN, "");
+                if (!string.IsNullOrEmpty(loginToken))
+                {
+                    ServerMgr.S.PushTest(loginToken, (data) =>
+                    {
+
+                    });
+                }
+
             }
         }
     }

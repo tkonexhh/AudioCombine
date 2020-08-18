@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GFrame;
 
 public class LoginPanel : BasePanel
 {
@@ -30,16 +31,18 @@ public class LoginPanel : BasePanel
         pwd = "etJkgmPm";
         ServerMgr.S.Login(username, pwd, (dataReceive) =>
         {
-            //TODO
-            //设置alias
-            Debug.LogError("code:" + dataReceive.retCode);
-            //保存登陆状态
             ClosePanel();
-            //设置alias
-            Debug.LogError("huakai" + username.ToLower());
             AndroidMgr.S.SetJPushAlias("huakai" + username.ToLower());
-            UIMgr.S.OpenPanel("Panels/ListenPannel");
 
+            UIMgr.S.OpenPanel("Panels/ListenPannel");
+            DataRecord.S.SetString(Define.SAVEKEY_USERNAME, username);
+            string loginToken = dataReceive.data.loginToken;
+            DataRecord.S.SetString(Define.SAVEKEY_LOGINTOKEN, loginToken);
+            DataRecord.S.Save();
+            // ServerMgr.S.PushTest(loginToken, (data) =>
+            // {
+            //     Debug.LogError(data.retResp);
+            // });
         });
     }
 }

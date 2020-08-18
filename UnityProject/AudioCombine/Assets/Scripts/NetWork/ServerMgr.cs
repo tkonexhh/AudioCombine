@@ -32,7 +32,15 @@ public class ServerMgr : TMonoSingleton<ServerMgr>
                     callback(loginData);
             });
         });
+    }
 
+    public void PushTest(string loginToken, Action<HttpPushData.DataReceive> callback)
+    {
+        m_HttpHandler.PushTest(loginToken, (data) =>
+           {
+               if (callback != null && IsResponseOK(data.retCode))
+                   callback(data);
+           });
     }
 
 
