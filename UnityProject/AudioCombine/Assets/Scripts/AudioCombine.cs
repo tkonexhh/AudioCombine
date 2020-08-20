@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using UnityEngine;
 
 public class AudioCombine : MonoBehaviour
@@ -20,15 +21,33 @@ public class AudioCombine : MonoBehaviour
 
     private List<AudioClip> m_PrepareAudios = new List<AudioClip>();
 
-
+    private Queue<AudioPrice> m_AudioQueues = new Queue<AudioPrice>();
+    private AudioPrice m_CurrentAudioPrice = null;
+    private bool m_Isplaying = false;
     public void Init()
     {
         if (m_AudioSource == null)
             m_AudioSource = Camera.main.GetComponent<AudioSource>();
     }
 
+    public void AddAudioPrice(AudioPrice audioPrice)
+    {
+        m_AudioQueues.Enqueue(audioPrice);
 
-    public void PlayPriceAudio(float cash)
+        PlayNext();
+    }
+
+    private void PlayNext()
+    {
+        if (m_AudioQueues.Count > 0 && !m_Isplaying)
+        {
+            m_CurrentAudioPrice = m_AudioQueues.Dequeue();
+            PlayPriceAudio(m_CurrentAudioPrice.cash);
+        }
+    }
+
+
+    private void PlayPriceAudio(float cash)
     {
         m_PrepareAudios.Clear();
 
@@ -59,17 +78,17 @@ public class AudioCombine : MonoBehaviour
         //处理小数部分
         float flo = cash - (int)cash;
         flo = float.Parse(flo.ToString("#0.00"));
-        Debug.LogError(flo);
-
+        //Debug.LogError(flo);
 
         //m_PrepareAudios.Add(m_StartAudio);
         for (int i = 0; i < m_Num.Count; i++)
         {
-            Debug.LogError(m_Num[i] + unit[length - i - 1]);
+            //Debug.LogError(m_Num[i] + unit[length - i - 1]);
             if (m_Num[i] == 0)
             {
                 //TODO 如果上一个已经是0的话 这次就不用加了
-                if (i == m_Num.Count - 1)
+                //if (i == m_Num.Count - 1)
+                if (m_Num[i - 1] == 0)
                 {
                     //个位不加0
                 }
@@ -104,7 +123,12 @@ public class AudioCombine : MonoBehaviour
 
             for (int i = 0; i < m_Num.Count; i++)
             {
-                Debug.LogError(m_Num[i] + unitfloat[i]);
+                //Debug.LogError(m_Num[i] + unitfloat[i]);
+                if (i == 1 && m_Num[i] == 0)
+                {
+                    continue;
+                }
+
                 if (m_Num[i] == 0)
                 {
                     m_PrepareAudios.Add(m_NumAudios[0]);
@@ -139,6 +163,7 @@ public class AudioCombine : MonoBehaviour
 
     IEnumerator Audio(List<AudioClip> audios)
     {
+        m_Isplaying = true;
         m_AudioSource.Pause();
         var tempAudios = new List<AudioClip>(audios.ToArray());
         for (int i = 0; i < tempAudios.Count; i++)
@@ -149,5 +174,30 @@ public class AudioCombine : MonoBehaviour
             yield return new WaitForSeconds(tempAudios[i].length);
         }
         m_AudioSource.Pause();
+
+        m_Isplaying = false;
+        StartCoroutine(DelayPlayNext());
     }
+
+    IEnumerator DelayPlayNext()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        PlayNext();
+    }
+
+}
+
+
+public class AudioPrice
+{
+    public float cash { set; get; }
+
+    public AudioPrice(float cash)
+    {
+        this.cash = cash;
+    }
+
+
+
 }

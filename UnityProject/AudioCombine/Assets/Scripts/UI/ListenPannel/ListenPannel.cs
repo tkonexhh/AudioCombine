@@ -17,11 +17,15 @@ public class ListenPannel : BasePanel
     protected override void OnInit()
     {
         s_Instance = this;
+
+        // PlayAudio(2.0f);
+        // PlayAudio(2003.4f);
     }
 
     public void PlayAudio(float cash)
     {
         m_AudioCombine.Init();
-        m_AudioCombine.PlayPriceAudio(cash);
+        var audioPrice = new AudioPrice(cash);
+        m_AudioCombine.AddAudioPrice(audioPrice);
     }
 }
