@@ -47,6 +47,7 @@
      <Compile Include="Assets\FrameWork\Data\IDataRecord.cs" />
      <Compile Include="Assets\FrameWork\Helper\EncryptUtil.cs" />
      <Compile Include="Assets\FrameWork\Helper\GameObjectHelper.cs" />
+     <Compile Include="Assets\FrameWork\Helper\Helper.cs" />
      <Compile Include="Assets\FrameWork\Singleton\ISingleton.cs" />
      <Compile Include="Assets\FrameWork\Singleton\MonoSingleton.cs" />
      <Compile Include="Assets\FrameWork\Singleton\TMonoSingleton.cs" />

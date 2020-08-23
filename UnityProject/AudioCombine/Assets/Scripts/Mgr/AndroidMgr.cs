@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using GFrame;
+using Qarth;
 
 public class AndroidMgr : MonoBehaviour
 {
@@ -73,7 +74,19 @@ public class AndroidListener : AndroidJavaProxy
         UnityEngine.Debug.LogError("Demo" + extra);
         if (ListenPannel.S != null)
         {
-            ListenPannel.S.PlayAudio(123.23f);
+            //ListenPannel.S.PlayAudio(123.23f);
+            extra = extra.Replace("\"", "");
+            Debug.LogError("Demo" + extra);
+            var lstExtra = Helper.String2ListString(extra, ":");
+            if (lstExtra.Count <= 1) return;
+            string cashStr = lstExtra[1];
+            Debug.LogError("Demo" + cashStr);
+            float cash = -1;
+            if (float.TryParse(cashStr, out cash))
+            {
+                ListenPannel.S.PlayAudio(cash);
+            }
+
         }
     }
 
@@ -93,4 +106,10 @@ public class JPushMessage
     public string checkTag;
     public int errorCode;
 }
+
+public class MessageExtra
+{
+    public string amount;
+}
+
 

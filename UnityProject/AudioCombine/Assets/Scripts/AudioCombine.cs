@@ -80,7 +80,7 @@ public class AudioCombine : MonoBehaviour
         flo = float.Parse(flo.ToString("#0.00"));
         //Debug.LogError(flo);
 
-        //m_PrepareAudios.Add(m_StartAudio);
+        m_PrepareAudios.Add(m_StartAudio);
         for (int i = 0; i < m_Num.Count; i++)
         {
             //Debug.LogError(m_Num[i] + unit[length - i - 1]);
@@ -121,7 +121,7 @@ public class AudioCombine : MonoBehaviour
                 m_Num.Add(temp);
             }
 
-            for (int i = 0; i < m_Num.Count; i++)
+            for (int i = 0; i < 2; i++)
             {
                 //Debug.LogError(m_Num[i] + unitfloat[i]);
                 if (i == 1 && m_Num[i] == 0)
