@@ -49,7 +49,7 @@ android {
                 if (variant.buildType.name == 'release') {
                     def versionName = variant.mergedFlavor.versionName
                     def flavor = variant.getFlavorName()
-                    fileName = "mergepig_release_${flavor}_v${versionName}.apk"
+                    fileName = "huakai_release_${flavor}_v${versionName}.apk"
                 }
                 output.outputFileName = fileName
             }

@@ -129,6 +129,7 @@ public class PushMessageReceiver extends JPushMessageReceiver {
         Log.e("JIGUANG-Example", "processCustomMessage  " + customMessage);
         if(UnityPlayerActivity.pushListener!=null)
         {
+            Log.e("JIGUANG-Example","extra"+customMessage.extra);
             UnityPlayerActivity.pushListener.processCustomMessage(customMessage.extra);
         }
 //                if (MainActivity.isForeground) {

@@ -22,6 +22,7 @@ public class AppMgr : MonoBehaviour
     private void Awake()
     {
         s_Instane = this;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
         gameObject.AddComponent<AndroidMgr>();
     }
 

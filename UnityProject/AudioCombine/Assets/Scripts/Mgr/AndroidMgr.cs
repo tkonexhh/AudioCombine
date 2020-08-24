@@ -47,7 +47,7 @@ public class AndroidListener : AndroidJavaProxy
 
     public void onAliasOperatorResult(string msg)//和java中接口同名
     {
-        UnityEngine.Debug.LogError("Demo" + msg);
+        UnityEngine.Debug.LogError("JIGUANG-Example" + msg);
         var message = LitJson.JsonMapper.ToObject<JPushMessage>(msg);
         if (message != null)
         {
@@ -71,11 +71,14 @@ public class AndroidListener : AndroidJavaProxy
 
     public void processCustomMessage(string extra)
     {
-        UnityEngine.Debug.LogError("Demo" + extra);
+        UnityEngine.Debug.LogError("JIGUANG-Example" + extra);
         if (ListenPannel.S != null)
         {
+            UnityEngine.Debug.LogError("JIGUANG-Example2" + extra);
             //ListenPannel.S.PlayAudio(123.23f);
             extra = extra.Replace("\"", "");
+            extra = extra.Replace("{", "");
+            extra = extra.Replace("}", "");
             Debug.LogError("Demo" + extra);
             var lstExtra = Helper.String2ListString(extra, ":");
             if (lstExtra.Count <= 1) return;
@@ -93,7 +96,12 @@ public class AndroidListener : AndroidJavaProxy
     IEnumerator SetAlias()
     {
         yield return new WaitForSeconds(2.0f);
-        AndroidMgr.S.SetJPushAlias("huakai20200705");
+        string username = DataRecord.S.GetString(Define.SAVEKEY_USERNAME, "");
+        if (!string.IsNullOrEmpty(username))
+        {
+            AndroidMgr.S.SetJPushAlias("huakai" + username.ToLower());
+        }
+
     }
 }
 
