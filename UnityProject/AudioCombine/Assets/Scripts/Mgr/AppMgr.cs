@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GFrame;
+using LitJson;
+using Qarth;
 
 public class AppMgr : MonoBehaviour
 {
@@ -30,6 +32,26 @@ public class AppMgr : MonoBehaviour
         Screen.autorotateToPortraitUpsideDown = false;
         Screen.autorotateToLandscapeRight = false;
         Screen.autorotateToLandscapeLeft = false;
+
+        // string str = "{alias='huakai0512', tags=null, checkTag='null', errorCode=0, tagCheckStateResult=false, isTagCheckOperator=false, sequence=0, mobileNumber=null}";
+        // str = str.Replace("{", "");
+        // str = str.Replace("}", "");
+        // str = str.Replace(" ", "");
+        // var values = Helper.String2ListString(str, ",");
+        // for (int i = 0; i < values.Count; i++)
+        // {
+        //     // Debug.LogError(values[i]);
+        //     var steps = Helper.String2ListString(values[i], "=");
+        //     Debug.LogError(steps[0]);
+        //     if (steps[0].Equals("errorCode"))
+        //     {
+        //         Debug.LogError(steps[0]);
+        //         int errorCode = int.Parse(steps[1]);
+        //         Debug.LogError("----" + errorCode);
+        //         break;
+        //     }
+        // }
+
     }
 
 

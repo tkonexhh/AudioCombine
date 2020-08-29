@@ -48,25 +48,61 @@ public class AndroidListener : AndroidJavaProxy
     public void onAliasOperatorResult(string msg)//和java中接口同名
     {
         UnityEngine.Debug.LogError("JIGUANG-Example" + msg);
-        var message = LitJson.JsonMapper.ToObject<JPushMessage>(msg);
-        if (message != null)
+
+        msg = msg.Replace("{", "");
+        msg = msg.Replace("}", "");
+        msg = msg.Replace(" ", "");
+        var values = Helper.String2ListString(msg, ",");
+        for (int i = 0; i < values.Count; i++)
         {
-            if (message.errorCode != 0)
+            var steps = Helper.String2ListString(values[i], "=");
+            // Debug.LogError(steps[0]);
+            if (steps[0].Equals("errorCode"))
             {
-                AndroidMgr.S.StartCoroutine(SetAlias());
-
-                //测试一下是否能收到通知
-                string loginToken = DataRecord.S.GetString(Define.SAVEKEY_LOGINTOKEN, "");
-                if (!string.IsNullOrEmpty(loginToken))
+                // Debug.LogError(steps[0]);
+                int errorCode = int.Parse(steps[1]);
+                // Debug.LogError("----" + errorCode);
+                if (errorCode != 0)
                 {
-                    ServerMgr.S.PushTest(loginToken, (data) =>
-                    {
-
-                    });
+                    AndroidMgr.S.StartCoroutine(SetAlias());
                 }
-
+                else if (errorCode == 0)
+                {
+                    string loginToken = DataRecord.S.GetString(Define.SAVEKEY_LOGINTOKEN, "");
+                    //Debug.LogError("Unity --onAliasOperatorResult" + loginToken);
+                    if (!string.IsNullOrEmpty(loginToken))
+                    {
+                        ServerMgr.S.PushTest(loginToken, (data) =>
+                        {
+                            //Debug.LogError("Unity --PushTest Success" + data.retResp);
+                        });
+                    }
+                }
+                break;
             }
         }
+
+        //{alias='huakai0512', tags=null, checkTag='null', errorCode=0, tagCheckStateResult=false, isTagCheckOperator=false, sequence=0, mobileNumber=null}
+        // var message = LitJson.JsonMapper.ToObject<JPushMessage>(msg);
+        // if (message != null)
+        // {
+        //     if (message.errorCode != 0)
+        //     {
+        //         AndroidMgr.S.StartCoroutine(SetAlias());
+
+        //         //测试一下是否能收到通知
+        //         string loginToken = DataRecord.S.GetString(Define.SAVEKEY_LOGINTOKEN, "");
+        //         Debug.LogError("Unity --onAliasOperatorResult" + loginToken);
+        //         if (!string.IsNullOrEmpty(loginToken))
+        //         {
+        //             ServerMgr.S.PushTest(loginToken, (data) =>
+        //             {
+        //                 Debug.LogError("Unity --PushTest Success" + data.retResp);
+        //             });
+        //         }
+
+        //     }
+        // }
     }
 
     public void processCustomMessage(string extra)
@@ -109,10 +145,14 @@ public class AndroidListener : AndroidJavaProxy
 //JPushMessage{alias='demo', tags=null, checkTag='null', errorCode=0, tagCheckStateResult=false, isTagCheckOperator=false, sequence=0, mobileNumber=null}
 public class JPushMessage
 {
-    public string alias;
-    public string tags;
-    public string checkTag;
-    public int errorCode;
+    public string alias = "123";
+    public string tags = "123";
+    public string checkTag = "123";
+    public int errorCode = -1;
+    public bool tagCheckStateResult = false;
+    public bool isTagCheckOperator = false;
+    public int sequence = -1;
+
 }
 
 public class MessageExtra

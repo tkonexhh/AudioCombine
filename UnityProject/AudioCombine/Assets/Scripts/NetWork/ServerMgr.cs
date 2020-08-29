@@ -19,6 +19,7 @@ public class ServerMgr : TMonoSingleton<ServerMgr>
 
     public void Login(string loginName, string password, Action<HttpLoginData.DataReceive> callback)
     {
+        WaittingPanel.S.ShowPanel();
         m_HttpHandler.GetAK(loginName, (data) =>
         {
             string ak = data.data.ak;
@@ -28,8 +29,18 @@ public class ServerMgr : TMonoSingleton<ServerMgr>
             //Debug.LogError("pwd:" + encrpyPassword);
             m_HttpHandler.Login(loginName, encrpyPassword, (loginData) =>
             {
+
+                WaittingPanel.S.HidePanel();
+
+                if (!IsResponseOK(loginData.retCode))
+                {
+                    FloatMsgPannel.S.ShowMsg(loginData.retResp);
+                    return;
+                }
+
                 if (callback != null && IsResponseOK(loginData.retCode))
                     callback(loginData);
+
             });
         });
     }
@@ -37,10 +48,17 @@ public class ServerMgr : TMonoSingleton<ServerMgr>
     public void PushTest(string loginToken, Action<HttpPushData.DataReceive> callback)
     {
         m_HttpHandler.PushTest(loginToken, (data) =>
-           {
-               if (callback != null && IsResponseOK(data.retCode))
-                   callback(data);
-           });
+        {
+            if (!IsResponseOK(data.retCode))
+            {
+                FloatMsgPannel.S.ShowMsg(data.retResp);
+                return;
+            }
+
+            if (callback != null && IsResponseOK(data.retCode))
+                callback(data);
+
+        });
     }
 
 

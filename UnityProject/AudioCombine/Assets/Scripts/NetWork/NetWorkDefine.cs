@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class NetWorkDefine
 {
-    public const string baseUrl = "http://118.190.57.204/gift";
+    public const string baseUrl = "http://www.obtainbonus.com/gift";
+    //"http://118.190.57.204/gift";
+    //http://www.obtainbonus.com/
 }
 
 

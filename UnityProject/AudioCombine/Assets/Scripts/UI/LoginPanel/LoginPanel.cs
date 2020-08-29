@@ -27,8 +27,8 @@ public class LoginPanel : BasePanel
         }
         string username = m_InputUsername.text;
         string pwd = m_InputPasswword.text;
-        username = "20200705";
-        pwd = "etJkgmPm";
+        // username = "20200705";
+        // pwd = "etJkgmPm";
         ServerMgr.S.Login(username, pwd, (dataReceive) =>
         {
             ClosePanel();
@@ -37,6 +37,7 @@ public class LoginPanel : BasePanel
             UIMgr.S.OpenPanel("Panels/ListenPannel");
             DataRecord.S.SetString(Define.SAVEKEY_USERNAME, username);
             string loginToken = dataReceive.data.loginToken;
+            //Debug.LogError("Unity --loginToken" + loginToken);
             DataRecord.S.SetString(Define.SAVEKEY_LOGINTOKEN, loginToken);
             DataRecord.S.Save();
             // ServerMgr.S.PushTest(loginToken, (data) =>

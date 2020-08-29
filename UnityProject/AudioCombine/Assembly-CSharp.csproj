@@ -66,8 +66,10 @@
      <Compile Include="Assets\Scripts\NetWork\ServerMgr.cs" />
      <Compile Include="Assets\Scripts\UI\Base\BasePanel.cs" />
      <Compile Include="Assets\Scripts\UI\Base\UIMgr.cs" />
+     <Compile Include="Assets\Scripts\UI\FloatMsgPannel\FloatMsgPannel.cs" />
      <Compile Include="Assets\Scripts\UI\ListenPannel\ListenPannel.cs" />
      <Compile Include="Assets\Scripts\UI\LoginPanel\LoginPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\WaittingPanel\WaittingPanel.cs" />
      <None Include="Assets\3rdAssets\Demigiant\DOTween\readme.txt" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2019.4.4f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
