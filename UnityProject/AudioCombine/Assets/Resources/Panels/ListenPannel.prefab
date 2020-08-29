@@ -262,7 +262,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ad69b181341744eeeb35b5a75447d1e0, type: 3}
   - {fileID: 8300000, guid: c62b321835f2f45ad84ad29c8db965c8, type: 3}
   m_UnitAudios:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: f238ba4c38c184369b46e3ed56679bc1, type: 3}
   - {fileID: 8300000, guid: b85af34dc32484a6a9c21e1ebd4c7c24, type: 3}
   - {fileID: 8300000, guid: d98263b7dbd434b2c97894211fedaafe, type: 3}
   - {fileID: 8300000, guid: 3d20edeed58f24b3993017ffd2eed0d1, type: 3}

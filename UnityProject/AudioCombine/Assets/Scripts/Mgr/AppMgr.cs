@@ -24,6 +24,12 @@ public class AppMgr : MonoBehaviour
         s_Instane = this;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         gameObject.AddComponent<AndroidMgr>();
+
+        //设置只允许横屏旋转
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+        Screen.autorotateToLandscapeRight = false;
+        Screen.autorotateToLandscapeLeft = false;
     }
 
 

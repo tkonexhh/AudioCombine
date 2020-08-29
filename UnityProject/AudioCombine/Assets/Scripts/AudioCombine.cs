@@ -60,9 +60,36 @@ public class AudioCombine : MonoBehaviour
 
         m_Num.Clear();
 
-        //处理整数部分
-        int n = (int)cash;
-        int length = GetLength(n);                         // 获取n的位数，调用<1>的函数                     
+        m_PrepareAudios.Add(m_StartAudio);
+
+        int part_int = (int)cash;
+        HandleInteger(part_int);
+
+        //处理小数部分
+        float part_float = cash - (int)cash;
+        if (part_float > 0)
+        {
+            HandleFloat(part_float);
+        }
+
+        StartCoroutine(Audio(m_PrepareAudios));
+    }
+
+    private void HandleInteger(int cash)
+    {
+        int n = cash;
+        int part_int = n;
+
+        int length = GetLength(n);
+
+        if (part_int == 100 || part_int == 1000 || part_int == 10000)
+        {
+            m_PrepareAudios.Add(m_NumAudios[1]);
+            m_PrepareAudios.Add(m_UnitAudios[length - 1]);
+            return;
+        }
+
+        // 获取n的位数，调用<1>的函数                     
         int power = (int)Mathf.Pow((float)10, (float)length - 1);  //  获取n最高位数字需要除模的数字   
         int temp;
 
@@ -75,12 +102,19 @@ public class AudioCombine : MonoBehaviour
             m_Num.Add(temp);
         }
 
-        //处理小数部分
-        float flo = cash - (int)cash;
-        flo = float.Parse(flo.ToString("#0.00"));
-        //Debug.LogError(flo);
+        if (part_int >= 10 && part_int <= 19)
+        {
+            Debug.LogError("frame");
+            m_PrepareAudios.Add(m_UnitAudios[1]);
+            if (m_Num[1] > 0)
+            {
+                m_PrepareAudios.Add(m_NumAudios[m_Num[1]]);
+            }
 
-        m_PrepareAudios.Add(m_StartAudio);
+            m_PrepareAudios.Add(m_UnitAudios[0]);
+            return;
+        }
+
         for (int i = 0; i < m_Num.Count; i++)
         {
             //Debug.LogError(m_Num[i] + unit[length - i - 1]);
@@ -102,16 +136,20 @@ public class AudioCombine : MonoBehaviour
                 m_PrepareAudios.Add(m_UnitAudios[length - i - 1]);
             }
         }
+    }
+
+    private void HandleFloat(float flo)
+    {
+        flo = float.Parse(flo.ToString("#0.00"));
 
         if (flo > 0)
         {
-            m_PrepareAudios.Add(m_DotAudio);
             m_Num.Clear();
             flo *= 100;
-            n = (int)flo;
-            length = GetLength(n);
-            power = (int)Mathf.Pow((float)10, (float)length - 1);
-
+            int n = (int)flo;
+            int length = GetLength(n);
+            int power = (int)Mathf.Pow((float)10, (float)length - 1);
+            int temp;
             while (power != 0)
             {
                 temp = n / power;   //    此数位数上的数字
@@ -140,12 +178,6 @@ public class AudioCombine : MonoBehaviour
                 }
             }
         }
-
-        if (flo == 0)
-            m_PrepareAudios.Add(m_EndAudio);
-
-        StartCoroutine(Audio(m_PrepareAudios));
-
     }
 
     private int GetLength(int place)
