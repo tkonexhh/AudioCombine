@@ -45,9 +45,15 @@
      <Compile Include="Assets\3rdAssets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\FrameWork\Data\DataRecorder.cs" />
      <Compile Include="Assets\FrameWork\Data\IDataRecord.cs" />
+     <Compile Include="Assets\FrameWork\Event\EngineEventID.cs" />
+     <Compile Include="Assets\FrameWork\Event\EventSystem.cs" />
+     <Compile Include="Assets\FrameWork\Event\IEventListener.cs" />
      <Compile Include="Assets\FrameWork\Helper\EncryptUtil.cs" />
      <Compile Include="Assets\FrameWork\Helper\GameObjectHelper.cs" />
      <Compile Include="Assets\FrameWork\Helper\Helper.cs" />
+     <Compile Include="Assets\FrameWork\Pool\GameObjectPool.cs" />
+     <Compile Include="Assets\FrameWork\Pool\GameObjectPoolMgr.cs" />
+     <Compile Include="Assets\FrameWork\Pool\ObjectPool.cs" />
      <Compile Include="Assets\FrameWork\Singleton\ISingleton.cs" />
      <Compile Include="Assets\FrameWork\Singleton\MonoSingleton.cs" />
      <Compile Include="Assets\FrameWork\Singleton\TMonoSingleton.cs" />
@@ -55,6 +61,7 @@
      <Compile Include="Assets\FrameWork\Singleton\TSingleton.cs" />
      <Compile Include="Assets\Scripts\AudioCombine.cs" />
      <Compile Include="Assets\Scripts\Define\Define.cs" />
+     <Compile Include="Assets\Scripts\Define\EventID.cs" />
      <Compile Include="Assets\Scripts\Mgr\AndroidMgr.cs" />
      <Compile Include="Assets\Scripts\Mgr\AppMgr.cs" />
      <Compile Include="Assets\Scripts\NetWork\Handler\HttpHandler.cs" />
@@ -68,6 +75,7 @@
      <Compile Include="Assets\Scripts\UI\Base\UIMgr.cs" />
      <Compile Include="Assets\Scripts\UI\FloatMsgPannel\FloatMsgPannel.cs" />
      <Compile Include="Assets\Scripts\UI\ListenPannel\ListenPannel.cs" />
+     <Compile Include="Assets\Scripts\UI\ListenPannel\ListenPannel_Bind.cs" />
      <Compile Include="Assets\Scripts\UI\LoginPanel\LoginPanel.cs" />
      <Compile Include="Assets\Scripts\UI\WaittingPanel\WaittingPanel.cs" />
      <None Include="Assets\3rdAssets\Demigiant\DOTween\readme.txt" />

@@ -6,6 +6,9 @@ using UnityEngine;
 public class AudioCombine : MonoBehaviour
 {
     [SerializeField] private AudioSource m_AudioSource;
+
+    [SerializeField] private AudioClip m_StartAudio1;
+    [SerializeField] private AudioClip m_StartAudio2;
     [SerializeField] private AudioClip m_StartAudio;
     [SerializeField] private AudioClip m_DotAudio;
     [SerializeField] private AudioClip m_EndAudio;
@@ -60,6 +63,8 @@ public class AudioCombine : MonoBehaviour
 
         m_Num.Clear();
 
+        m_PrepareAudios.Add(m_StartAudio1);
+        m_PrepareAudios.Add(m_StartAudio2);
         m_PrepareAudios.Add(m_StartAudio);
 
         int part_int = (int)cash;

@@ -6,6 +6,7 @@ using Proyecto26;
 using Qarth;
 using System.Linq;
 using UnityEngine.Networking;
+using GFrame;
 
 public class ServerMgr : TMonoSingleton<ServerMgr>
 {
@@ -47,8 +48,10 @@ public class ServerMgr : TMonoSingleton<ServerMgr>
 
     public void PushTest(string loginToken, Action<HttpPushData.DataReceive> callback)
     {
+        EventSystem.S.Send(EventID.OnPushTestStart);
         m_HttpHandler.PushTest(loginToken, (data) =>
         {
+
             if (!IsResponseOK(data.retCode))
             {
                 FloatMsgPannel.S.ShowMsg(data.retResp);
@@ -56,8 +59,13 @@ public class ServerMgr : TMonoSingleton<ServerMgr>
             }
 
             if (callback != null && IsResponseOK(data.retCode))
+            {
                 callback(data);
+                DataRecord.S.SetBool(Define.SAVEKEY_PUSHTEST, true);
+                DataRecord.S.Save();
+            }
 
+            EventSystem.S.Send(EventID.OnPushTestEnded);
         });
     }
 
