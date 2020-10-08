@@ -6,10 +6,8 @@ using UnityEngine;
 public class AudioCombine : MonoBehaviour
 {
     [SerializeField] private AudioSource m_AudioSource;
-
-    [SerializeField] private AudioClip m_StartAudio1;
-    [SerializeField] private AudioClip m_StartAudio2;
     [SerializeField] private AudioClip m_StartAudio;
+    [SerializeField] private AudioClip m_StartSubside;
     [SerializeField] private AudioClip m_DotAudio;
     [SerializeField] private AudioClip m_EndAudio;
     [SerializeField] private AudioClip[] m_NumAudios;
@@ -45,12 +43,12 @@ public class AudioCombine : MonoBehaviour
         if (m_AudioQueues.Count > 0 && !m_Isplaying)
         {
             m_CurrentAudioPrice = m_AudioQueues.Dequeue();
-            PlayPriceAudio(m_CurrentAudioPrice.cash);
+            PlayPriceAudio(m_CurrentAudioPrice.cash, m_CurrentAudioPrice.subside);
         }
     }
 
 
-    private void PlayPriceAudio(float cash)
+    private void PlayPriceAudio(float cash, float subside)
     {
         m_PrepareAudios.Clear();
 
@@ -63,8 +61,6 @@ public class AudioCombine : MonoBehaviour
 
         m_Num.Clear();
 
-        m_PrepareAudios.Add(m_StartAudio1);
-        m_PrepareAudios.Add(m_StartAudio2);
         m_PrepareAudios.Add(m_StartAudio);
 
         int part_int = (int)cash;
@@ -75,6 +71,21 @@ public class AudioCombine : MonoBehaviour
         if (part_float > 0)
         {
             HandleFloat(part_float);
+        }
+
+        if (subside > 0 && AppMgr.S.isOpenSubsides)
+        {
+            m_PrepareAudios.Add(m_StartSubside);
+            part_int = (int)subside;
+            if (part_int > 0)
+                HandleInteger(part_int);
+
+            //处理小数部分
+            part_float = subside - (int)subside;
+            if (part_float > 0)
+            {
+                HandleFloat(part_float);
+            }
         }
 
         StartCoroutine(Audio(m_PrepareAudios));
@@ -109,7 +120,6 @@ public class AudioCombine : MonoBehaviour
 
         if (part_int >= 10 && part_int <= 19)
         {
-            Debug.LogError("frame");
             m_PrepareAudios.Add(m_UnitAudios[1]);
             if (m_Num[1] > 0)
             {
@@ -229,10 +239,12 @@ public class AudioCombine : MonoBehaviour
 public class AudioPrice
 {
     public float cash { set; get; }
+    public float subside { set; get; }
 
-    public AudioPrice(float cash)
+    public AudioPrice(float cash, float subside = 0)
     {
         this.cash = cash;
+        this.subside = subside;
     }
 
 

@@ -115,17 +115,25 @@ public class AndroidListener : AndroidJavaProxy
             extra = extra.Replace("\"", "");
             extra = extra.Replace("{", "");
             extra = extra.Replace("}", "");
+
+
+
             Debug.LogError("Demo" + extra);
             var lstExtra = Helper.String2ListString(extra, ":");
             if (lstExtra.Count <= 1) return;
             string cashStr = lstExtra[1];
             Debug.LogError("Demo" + cashStr);
             float cash = -1;
+            float subside = 0;
             if (float.TryParse(cashStr, out cash))
             {
-                ListenPannel.S.PlayAudio(cash);
+                ListenPannel.S.PlayAudio(cash, subside);
             }
 
+            var values = Helper.String2ListString(extra, ",");
+            string cashStr1 = Helper.String2ListString(values[1], ":")[1];
+            string subsideStr1 = Helper.String2ListString(values[2], ":")[1];
+            Debug.LogError("----" + cashStr1 + subsideStr1);
         }
     }
 

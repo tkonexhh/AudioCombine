@@ -140,6 +140,52 @@ public class HttpHandler
           .Catch(e => Debug.LogError(e));
     }
 
+    public void Test(string msg, Action<HttpTestData.DataReceive> callback)
+    {
+        var send = new HttpPushData.DataSend();
+        Dictionary<string, string> qs = new Dictionary<string, string>();
+        //qs.Add(send.loginToken, loginToken);
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        header.Add(send.loginToken, msg);
+
+        RestClient.Request(GetRequestHelper(HttpTestData.portPath, HttpTestData.portMethod, qs, header)).Then(response =>
+        {
+            if (response.StatusCode == 200 && string.IsNullOrEmpty(response.Error))
+            {
+                var data = LitJson.JsonMapper.ToObject<HttpTestData.DataReceive>(response.Text);
+                if (data != null && callback != null)
+                {
+                    if (data.retCode != "0000")
+                    {
+                        Log.e("data.code  = " + data.retCode);
+                    }
+                    callback.Invoke(data);
+                    callback = null;
+                }
+            }
+            else
+            {
+                if (callback != null)
+                {
+                    callback.Invoke(null);
+                    callback = null;
+                }
+                Debug.LogError(response.StatusCode + " >>> " + response.Error);
+            }
+        }, reject =>
+        {
+            if (callback != null)
+            {
+                callback.Invoke(null);
+                callback = null;
+            }
+            Debug.LogError(reject.Message);
+        })
+          .Catch(e => Debug.LogError(e));
+    }
+
+
     RequestHelper GetRequestHelper(string path, string method, Dictionary<string, string> queries)
     {
         var request = new RequestHelper
@@ -155,6 +201,9 @@ public class HttpHandler
         };
         return request;
     }
+
+
+
 
     RequestHelper GetRequestHelper(string path, string method, Dictionary<string, string> queries, Dictionary<string, string> headers)
     {

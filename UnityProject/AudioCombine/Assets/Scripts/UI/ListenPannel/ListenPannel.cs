@@ -17,17 +17,13 @@ public class ListenPannel : BasePanel
     }
 
     [SerializeField] AudioCombine m_AudioCombine;
-
+    [SerializeField] Toggle m_ToggleSubsides;
     [Header("测试")]
     [SerializeField] private InputField m_InputText;
     [SerializeField] private Button m_BtnText;
     protected override void OnInit()
     {
         s_Instance = this;
-
-        //PlayAudio(2.0f);
-        //PlayAudio(2003.4f);
-
 
         m_BtnText.onClick.AddListener(() =>
         {
@@ -39,9 +35,17 @@ public class ListenPannel : BasePanel
             }
 
         });
+
+        m_ToggleSubsides.isOn = AppMgr.S.isOpenSubsides;
+        m_ToggleSubsides.onValueChanged.AddListener((isOn) =>
+        {
+            AppMgr.S.isOpenSubsides = isOn;
+        });
+
+
     }
 
-    public void PlayAudio(float cash)
+    public void PlayAudio(float cash, float subside = 0)
     {
         if (cash < 0.01 || cash > 99999)
         {
@@ -50,7 +54,7 @@ public class ListenPannel : BasePanel
         }
 
         m_AudioCombine.Init();
-        var audioPrice = new AudioPrice(cash);
+        var audioPrice = new AudioPrice(cash, subside);
         m_AudioCombine.AddAudioPrice(audioPrice);
     }
 }

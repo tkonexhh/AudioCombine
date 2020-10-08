@@ -70,6 +70,21 @@ public class ServerMgr : TMonoSingleton<ServerMgr>
     }
 
 
+    public void Test(string msg, Action<HttpTestData.DataReceive> callback)
+    {
+        m_HttpHandler.Test(msg, (data) =>
+        {
+            if (!IsResponseOK(data.retCode))
+            {
+                FloatMsgPannel.S.ShowMsg(data.retResp);
+                return;
+            }
+
+            Debug.LogError(data.retResp);
+        });
+    }
+
+
     private bool IsResponseOK(string code)
     {
         return code.Equals("0000");

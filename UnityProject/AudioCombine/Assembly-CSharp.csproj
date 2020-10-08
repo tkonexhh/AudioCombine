@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\NetWork\HttpData\HttpData.cs" />
      <Compile Include="Assets\Scripts\NetWork\HttpData\HttpLoginData.cs" />
      <Compile Include="Assets\Scripts\NetWork\HttpData\HttpPushData.cs" />
+     <Compile Include="Assets\Scripts\NetWork\HttpData\HttpTestData.cs" />
      <Compile Include="Assets\Scripts\NetWork\NetWorkDefine.cs" />
      <Compile Include="Assets\Scripts\NetWork\ServerMgr.cs" />
      <Compile Include="Assets\Scripts\UI\Base\BasePanel.cs" />

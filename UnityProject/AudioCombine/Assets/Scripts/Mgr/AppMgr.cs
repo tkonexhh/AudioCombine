@@ -9,15 +9,30 @@ public class AppMgr : MonoBehaviour
 {
     private static AppMgr s_Instane;
 
-    public AppMgr S
+    public static AppMgr S
     {
         get
         {
-            if (s_Instane == null)
-            {
-                s_Instane = this;
-            }
+            // if (s_Instane == null)
+            // {
+            //     s_Instane = this;
+            // }
             return s_Instane;
+        }
+    }
+
+    private bool m_IsOpenSubsides;
+    public bool isOpenSubsides
+    {
+        get
+        {
+            m_IsOpenSubsides = PlayerPrefs.GetInt(Define.SAVEKEY_OPENSUBSIDES, 0) == 1;
+            return m_IsOpenSubsides;
+        }
+        set
+        {
+            m_IsOpenSubsides = value;
+            PlayerPrefs.SetInt(Define.SAVEKEY_OPENSUBSIDES, m_IsOpenSubsides ? 1 : 0);
         }
     }
 
@@ -32,25 +47,6 @@ public class AppMgr : MonoBehaviour
         Screen.autorotateToPortraitUpsideDown = false;
         Screen.autorotateToLandscapeRight = false;
         Screen.autorotateToLandscapeLeft = false;
-
-        // string str = "{alias='huakai0512', tags=null, checkTag='null', errorCode=0, tagCheckStateResult=false, isTagCheckOperator=false, sequence=0, mobileNumber=null}";
-        // str = str.Replace("{", "");
-        // str = str.Replace("}", "");
-        // str = str.Replace(" ", "");
-        // var values = Helper.String2ListString(str, ",");
-        // for (int i = 0; i < values.Count; i++)
-        // {
-        //     // Debug.LogError(values[i]);
-        //     var steps = Helper.String2ListString(values[i], "=");
-        //     Debug.LogError(steps[0]);
-        //     if (steps[0].Equals("errorCode"))
-        //     {
-        //         Debug.LogError(steps[0]);
-        //         int errorCode = int.Parse(steps[1]);
-        //         Debug.LogError("----" + errorCode);
-        //         break;
-        //     }
-        // }
 
     }
 
