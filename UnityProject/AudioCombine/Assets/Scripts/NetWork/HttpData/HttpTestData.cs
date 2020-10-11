@@ -9,7 +9,7 @@ public class HttpTestData : HttpData
 
     public class DataSend
     {
-        public string msg = "jPushMsg";
+        public string jPushMsg = "jPushMsg";
     }
 
     public class DataReceive

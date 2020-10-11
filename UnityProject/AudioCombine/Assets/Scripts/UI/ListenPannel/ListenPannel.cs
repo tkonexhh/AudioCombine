@@ -57,4 +57,13 @@ public class ListenPannel : BasePanel
         var audioPrice = new AudioPrice(cash, subside);
         m_AudioCombine.AddAudioPrice(audioPrice);
     }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            ServerMgr.S.Test("123123", null);
+        }
+    }
 }

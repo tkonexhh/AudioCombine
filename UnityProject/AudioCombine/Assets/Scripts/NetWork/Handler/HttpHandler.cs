@@ -142,12 +142,12 @@ public class HttpHandler
 
     public void Test(string msg, Action<HttpTestData.DataReceive> callback)
     {
-        var send = new HttpPushData.DataSend();
+        var send = new HttpTestData.DataSend();
         Dictionary<string, string> qs = new Dictionary<string, string>();
         //qs.Add(send.loginToken, loginToken);
 
         Dictionary<string, string> header = new Dictionary<string, string>();
-        header.Add(send.loginToken, msg);
+        header.Add(send.jPushMsg, msg);
 
         RestClient.Request(GetRequestHelper(HttpTestData.portPath, HttpTestData.portMethod, qs, header)).Then(response =>
         {
